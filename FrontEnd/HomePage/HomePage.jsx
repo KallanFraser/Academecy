@@ -30,14 +30,14 @@ const HomePage = () => {
 			<div id="all-courses">
 				<div className="all-courses-column">
 					<button onClick={handleCourseOneNavigate}>1. Introduction to Web Design</button>
-					<button>2. React & Vite</button>
-				</div>
-				<div className="all-courses-column">
-					<button>3. Node JS & Express</button>
 					<button>4. Databases</button>
 				</div>
 				<div className="all-courses-column">
+					<button>2. React & Vite</button>
 					<button>5. Hosting Your Site</button>
+				</div>
+				<div className="all-courses-column">
+					<button>3. Node JS & Express</button>
 					<button>6. Tips and Tricks</button>
 				</div>
 			</div>

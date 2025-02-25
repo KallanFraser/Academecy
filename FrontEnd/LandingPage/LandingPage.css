@@ -17,20 +17,41 @@
 	margin-top: -5rem;
 }
 
-/* Keep your existing button styles */
+@keyframes growButton {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.2);
+	}
+}
+
+@keyframes shrinkButton {
+	0% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
 #landing-page button {
-	padding: 1rem 1.5rem;
-	font-size: 1.5rem;
+	padding: 1rem 1.75rem;
+	font-size: 1.75rem;
 	cursor: pointer;
 	border-radius: 20px;
 	border: none;
 	color: var(--inner-font-color);
 	font-weight: 600;
-	transition: background 0.3s ease, box-shadow 0.3s ease;
-	position: relative;
 	z-index: 0;
+	animation: shrinkButton 0.5s forwards;
 }
 
+#landing-page button:hover {
+	animation: growButton 0.5s forwards;
+}
+
+/*This layer sits on top of the glowing button version*/
 #landing-page button::after {
 	content: "";
 	position: absolute;
@@ -38,36 +59,9 @@
 	height: 100%;
 	left: 0;
 	top: 0;
-	border-radius: 19px;
-	background: hsl(117, 50%, 18%);
-	z-index: -1;
-	border: none;
-}
-
-#landing-page button::before {
-	content: "";
-	position: absolute;
-	top: -2px;
-	left: -2px;
-	width: calc(100% + 4px);
-	height: calc(100% + 4px);
 	border-radius: 20px;
-	border: none;
-
-	/* The multi-color gradient background */
-	background: linear-gradient(
-		45deg,
-		hsl(120, 100%, 25%),
-		hsl(120, 47%, 85%),
-		hsl(120, 63%, 53%),
-		hsl(120, 58%, 74%),
-		hsl(120, 100%, 25%)
-	);
-	background-size: 600%;
-	filter: blur(20px);
+	background: hsla(0, 0%, 19%, 0.95); /*Actual Background Color for the button*/
 	z-index: -1;
-
-	animation: glowingEffect 15s linear infinite;
 }
 
 @keyframes glowingEffect {
@@ -77,4 +71,29 @@
 	100% {
 		background-position: 400% 0%;
 	}
+}
+
+#landing-page button::before {
+	content: "";
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	border-radius: 10px;
+
+	/*Glow Effect color*/
+	background: linear-gradient(
+		45deg,
+		hsl(120, 54%, 31%),
+		hsl(103, 100%, 30%),
+		hsl(104, 43%, 23%),
+		hsl(120, 54%, 31%)
+	);
+	background-size: 600%;
+	filter: blur(12px); /*Gives the soft look to the glow*/
+	z-index: -1; /*Ensures that the glowing effect sits behind the button*/
+
+	/*Glow Effect animation*/
+	animation: glowingEffect 5s linear infinite;
 }

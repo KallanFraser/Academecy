@@ -3,6 +3,9 @@
 // Library Imports
 import React, { useEffect, useState } from "react";
 
+//Component Imports
+import { NavigationBar } from "../NavigationBar/NavigationBar";
+
 // CSS Import
 import "./WebDesign.css";
 
@@ -18,7 +21,11 @@ const WebDesign = () => {
 		return () => clearTimeout(timer); // Cleanup timer
 	}, []);
 
-	return <div id="web-design" style={{ opacity, transition: "opacity 1.5s ease-in-out" }}></div>;
+	return (
+		<div id="web-design" style={{ opacity, transition: "opacity 1.5s ease-in-out" }}>
+			<NavigationBar />
+		</div>
+	);
 };
 
 export default WebDesign;
