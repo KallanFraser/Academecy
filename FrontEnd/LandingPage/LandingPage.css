@@ -1,0 +1,80 @@
+/** @format */
+
+#landing-page {
+	width: 100vw;
+	height: 100vh;
+	background: radial-gradient(circle at top left, var(--primary-color), var(--cool-blue));
+	color: var(--inner-font-color);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 4rem;
+}
+
+#landing-page h1 {
+	font-size: 3.5rem;
+	margin-top: -5rem;
+}
+
+/* Keep your existing button styles */
+#landing-page button {
+	padding: 1rem 1.5rem;
+	font-size: 1.5rem;
+	cursor: pointer;
+	border-radius: 20px;
+	border: none;
+	color: var(--inner-font-color);
+	font-weight: 600;
+	transition: background 0.3s ease, box-shadow 0.3s ease;
+	position: relative;
+	z-index: 0;
+}
+
+#landing-page button::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	border-radius: 19px;
+	background: hsl(117, 50%, 18%);
+	z-index: -1;
+	border: none;
+}
+
+#landing-page button::before {
+	content: "";
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	border-radius: 20px;
+	border: none;
+
+	/* The multi-color gradient background */
+	background: linear-gradient(
+		45deg,
+		hsl(120, 100%, 25%),
+		hsl(120, 47%, 85%),
+		hsl(120, 63%, 53%),
+		hsl(120, 58%, 74%),
+		hsl(120, 100%, 25%)
+	);
+	background-size: 600%;
+	filter: blur(20px);
+	z-index: -1;
+
+	animation: glowingEffect 15s linear infinite;
+}
+
+@keyframes glowingEffect {
+	0% {
+		background-position: 0% 0%;
+	}
+	100% {
+		background-position: 400% 0%;
+	}
+}

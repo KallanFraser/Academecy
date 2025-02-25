@@ -1,0 +1,5 @@
+Folder Names in Pascal Case
+File Names in Camel Case
+Vite for frontend
+Node JS and Express for backend
+Database can come later and will use postgres
