@@ -12,8 +12,12 @@ export const NavigationBar = () => {
 				<img src="../Images/HomePageImage.png"></img>
 			</Link>
 			<div id="text-links">
-				<a className="links-text">All Courses</a>
-				<a className="links-text">Mini Projects</a>
+				<Link to="/HomePage">
+					<a className="links-text">All Courses</a>
+				</Link>
+				<Link to="/HomePage">
+					<a className="links-text">Mini Projects</a>
+				</Link>
 			</div>
 			<Link to="/">
 				<img src="../Images/DonateImage.png"></img>

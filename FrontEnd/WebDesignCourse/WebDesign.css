@@ -10,3 +10,80 @@
 	justify-content: center;
 	gap: 2rem;
 }
+
+#web-design-lesson-list {
+	width: 100%;
+	padding-inline: 5rem;
+	display: flex;
+	justify-content: space-between;
+	/*Test content*/
+	transform-style: preserve-3d;
+	transform: perspective(100rem);
+}
+
+.lesson-icon {
+	background-color: rgb(57, 57, 57);
+	height: 18rem;
+	max-width: 18%;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	border-radius: 1rem;
+	border: 0.25rem solid black;
+	overflow: hidden;
+	position: relative;
+	/*Test content*/
+	transition: 0.5s;
+	filter: brightness(0.05);
+}
+
+.lesson-icon:hover {
+	filter: brightness(1);
+	transform: translateZ(8rem);
+}
+
+.lesson-icon:hover + * {
+	filter: brightness(0.6);
+	transform: translateZ(5rem) rotateY(40deg);
+}
+
+.lesson-icon:hover + * + * {
+	filter: brightness(0.3);
+	transform: translateZ(2rem) rotateY(20deg);
+}
+
+.lesson-icon:hover + * + * + * {
+	filter: brightness(0.1);
+	transform: translateZ(1rem) rotateY(10deg);
+}
+
+.lesson-icon:has(+ *:hover) {
+	filter: brightness(0.6);
+	transform: translateZ(5rem) rotateY(-40deg);
+}
+
+.lesson-icon:has(+ * + *:hover) {
+	filter: brightness(0.3);
+	transform: translateZ(2rem) rotateY(-20deg);
+}
+
+.lesson-icon:has(+ * + * + *:hover) {
+	filter: brightness(0.1);
+	transform: translateZ(1rem) rotateY(-10deg);
+}
+
+.lesson-icon img {
+	max-width: 100%;
+	z-index: 1;
+}
+
+.overlay-text {
+	position: absolute;
+	font-size: 1.75rem;
+	z-index: 2;
+	color: #fff;
+	font-weight: 900;
+	text-align: center;
+	-webkit-text-stroke: 0.1rem black; /* Outline width and color */
+	text-shadow: 1rem 1rem 1rem hsl(0, 0%, 0%);
+}

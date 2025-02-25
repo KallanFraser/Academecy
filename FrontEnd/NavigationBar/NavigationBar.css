@@ -28,6 +28,7 @@
 	justify-content: space-evenly;
 	font-size: 2rem;
 	font-weight: 600;
+	text-decoration: none;
 }
 
 @keyframes growButton {
@@ -50,6 +51,8 @@
 
 #text-links a {
 	animation: shrinkButton 0.5s forwards;
+	text-decoration: none;
+	color: white;
 }
 
 #text-links a:hover {
