@@ -1,0 +1,55 @@
+/** @format */
+#web-design-lesson-one {
+	width: 100vw;
+	height: 100vh;
+	background: radial-gradient(circle at top left, var(--primary-color), var(--cool-blue));
+	color: var(--inner-font-color);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#all-lessons-container {
+	margin-top: 6rem;
+	width: 100%;
+	height: 40rem;
+}
+
+.lesson {
+	margin: 3rem;
+	padding: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.lesson h1 {
+	text-align: center;
+	font-weight: 600;
+	font-size: 2.75rem;
+}
+
+.lesson h2 {
+	font-size: 2rem;
+}
+
+.lesson p {
+	display: flex;
+	font-size: 1.5rem;
+}
+
+.fade-word-effect {
+	opacity: 0;
+	display: inline-block;
+	animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+	to {
+		opacity: 1;
+	}
+}
+
+#next-button {
+	z-index: 10;
+}

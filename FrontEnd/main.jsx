@@ -8,8 +8,8 @@ import "./main.css";
 
 import LandingPage from "./LandingPage/LandingPage";
 import HomePage from "./HomePage/HomePage";
-
 import WebDesign from "./WebDesignCourse/WebDesign";
+import WebDesignLessonOne from "./WebDesignCourse/LessonOne/WebDesignLessonOne";
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
@@ -18,6 +18,7 @@ createRoot(document.getElementById("root")).render(
 				<Route path="/" element={<LandingPage />} />
 				<Route path="/HomePage" element={<HomePage />} />
 				<Route path="/WebDesign" element={<WebDesign />} />
+				<Route path="/WebDesignLessonOne" element={<WebDesignLessonOne />} />
 			</Routes>
 		</Router>
 	</StrictMode>

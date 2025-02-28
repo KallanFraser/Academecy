@@ -2,6 +2,7 @@
 
 // Library Imports
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 //Component Imports
 import { NavigationBar } from "../NavigationBar/NavigationBar";
@@ -11,6 +12,7 @@ import "./WebDesign.css";
 
 const WebDesign = () => {
 	const [opacity, setOpacity] = useState(0);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		// Set opacity to 1 after component mounts to trigger transition
@@ -21,11 +23,15 @@ const WebDesign = () => {
 		return () => clearTimeout(timer); // Cleanup timer
 	}, []);
 
+	const handleNavigation = (path) => {
+		navigate(path);
+	};
+
 	return (
 		<div id="web-design" style={{ opacity, transition: "opacity 1.5s ease-in-out" }}>
 			<NavigationBar />
 			<div id="web-design-lesson-list">
-				<div class="lesson-icon">
+				<div class="lesson-icon" onClick={() => handleNavigation("/WebDesignLessonOne")}>
 					<img src="../Images/Web-Design-Lesson-One.jpg"></img>
 					<div className="overlay-text">1 - Foundations of the Web</div>
 				</div>
