@@ -13,12 +13,7 @@ import "./WebDesignLessonOne.css";
 
 const LessonOne = [
 	["Lesson 1.1: Introduction to the Internet"],
-	[
-		"What is the internet?",
-		"Basic networking concepts and protocols",
-		"How data travels across the web",
-		"Purpose of the browser",
-	],
+	["What is the internet?", "How data travels across the web", "Purpose of the browser"],
 	[
 		[
 			"The internet is the common virtual space and platform where all of todays modern day communication unfolds.",
@@ -26,24 +21,23 @@ const LessonOne = [
 			"Data exchange's typically follow certain procedures called standardized communication protocols.",
 			"These communication protocols are important to ensure data security and assurances of intact delivery.",
 			"An additional look deeper down would reveal that this data exchange occurs through real life physical infrastructure.",
-			"Cables, routers, and satellites are essentially the true backbone of the internet, providing the mediums for which data exchange can occur",
+			"Cables, routers, and satellites are essentially the true backbone of the internet, providing the mediums for which data exchange can occur.",
 		],
 		[
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+			"Whenever your browser wants to load a webpage, it creates a request and places it into something called a packet.",
+			"It then sends out this packet for it to travel across networks of connected devices which use routing algorithms to direct each packet toward its final destination.",
+			"Once the packet reaches its destination (the web server hosting the website), the server processes the request and either sends back the data requested, an error, or nothing at all.",
+			"If the data sent back is quite large, we usually break it down into smaller chunks - called packets.",
+			"Breaking data down into packets helps create a more efficient and reliable transmission of data",
+			"Once your browser receives these packets, it reassembles them in the correct order and reconstructs the complete response.",
+			"Your browser then reads over the data and renders the content into the webpage you see before you.",
 		],
 		[
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-			"123",
-			"123",
-			"123",
-			"123",
-		],
-		[
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-			"123",
+			"As mentioned before the browser is responsible for requesting data, reassembling it, and displaying it.",
+			"However the browser also does a whole lot more than just that.",
+			"It also is responsible for running the javascript that powers websites, handling user interactions, managing local data, and ensuring security.",
+			"As a little side note, the HTTP and HTTPS in the search panel you see often is actually the communication protocol all devices use to retrieve web pages and other associated resources.",
+			"So any time you see HTTP or HTTPS, just think of it as 'This is just my device attempting to fetch a web resource.'",
 		],
 	],
 ];
@@ -77,33 +71,38 @@ const LessonThree = [
 ];
 
 const WebDesignLessonOne = () => {
-	const [opacity, setOpacity] = useState(0); //Controls the opacity of the entire page
+	//Controls the opacity of the entire page
+	const [opacity, setOpacity] = useState(0);
 
-	//Keeps track of how many sections of content should be rendered. Initially 1 section.
+	//Keeps track of what page / lesson we are currently rendering / showing
 	const [currentIndex, setCurrentIndex] = useState(0);
 
+	//Used to automatically adjust the view if new content is lengthy
 	const contentEndRef = useRef(null);
 
+	//Use effect to apply the opacity fade in affect to the page
 	useEffect(() => {
-		// Set opacity to 1 after component mounts to trigger transition
 		const timer = setTimeout(() => {
 			setOpacity(1);
-		}, 10); // Ensures effect applies AFTER initial render
-
+		}, 10);
 		return () => clearTimeout(timer); // Cleanup timer
 	}, []);
 
-	//Basically increments renderedContent. The min is to ensure we do not exceed max length
+	//Function to handle the button click to view the next piece of content
 	const handleNext = () => {
+		//The min is used here to avoid accidental overflow
 		setCurrentIndex((prev) => Math.min(prev + 1, LessonOne[1].length - 1));
+		//Smooth transition effect
 		setTimeout(() => {
 			contentEndRef.current?.scrollIntoView({ behavior: "smooth" });
 		}, 500);
 	};
 
-	// Move to the previous section (if available)
+	//Function to handle if we want to go back to the previous piece of content
 	const handleBack = () => {
+		//Max is used here to prevent accidental underflow
 		setCurrentIndex((prev) => Math.max(prev - 1, 0));
+		//Smooth transition effect
 		setTimeout(() => {
 			contentEndRef.current?.scrollIntoView({ behavior: "smooth" });
 		}, 500);

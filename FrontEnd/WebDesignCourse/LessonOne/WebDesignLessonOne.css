@@ -1,7 +1,7 @@
 /** @format */
 #web-design-lesson-one {
 	width: 100vw;
-	height: 100vh;
+	min-height: 100vh;
 	background: radial-gradient(circle at top left, var(--primary-color), var(--cool-blue));
 	color: var(--inner-font-color);
 	display: flex;
@@ -13,8 +13,6 @@
 	margin-top: 6rem;
 	width: 60%;
 	height: auto;
-	border-top: 0.35rem solid hsl(0, 0%, 0%);
-	border-bottom: 0.35rem solid hsl(0, 0%, 0%);
 	margin-bottom: 5rem;
 }
 
@@ -26,16 +24,21 @@
 
 .lesson h1 {
 	margin-bottom: 1rem;
+	border-top: 0.2rem solid hsl(0, 0%, 100%);
+	border-bottom: 0.2rem solid hsl(0, 0%, 100%);
 	text-align: center;
 	font-size: 2.75rem;
-	color: hsl(120, 45%, 24%);
+	padding: 1rem;
+	color: hsl(120, 25%, 53%);
 }
 
 .lesson h2 {
 	font-size: 2rem;
+	padding: 0.75rem;
 	text-align: center;
-	color: hsl(120, 45%, 24%);
-	text-decoration: underline;
+	color: hsl(120, 25%, 53%);
+	margin-bottom: 0.75rem;
+	background-color: hsla(0, 0%, 29%, 0.221);
 }
 
 .lesson p {
