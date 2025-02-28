@@ -21,9 +21,12 @@ const LessonOne = [
 	],
 	[
 		[
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+			"The internet is the common virtual space and platform where all of todays modern day communication unfolds.",
+			"Under the hood it is really just a global network of interconnected computers that exchange data.",
+			"Data exchange's typically follow certain procedures called standardized communication protocols.",
+			"These communication protocols are important to ensure data security and assurances of intact delivery.",
+			"An additional look deeper down would reveal that this data exchange occurs through real life physical infrastructure.",
+			"Cables, routers, and satellites are essentially the true backbone of the internet, providing the mediums for which data exchange can occur",
 		],
 		[
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -77,7 +80,7 @@ const WebDesignLessonOne = () => {
 	const [opacity, setOpacity] = useState(0); //Controls the opacity of the entire page
 
 	//Keeps track of how many sections of content should be rendered. Initially 1 section.
-	const [renderedContent, setRenderedContent] = useState(1);
+	const [currentIndex, setCurrentIndex] = useState(0);
 
 	const contentEndRef = useRef(null);
 
@@ -92,7 +95,15 @@ const WebDesignLessonOne = () => {
 
 	//Basically increments renderedContent. The min is to ensure we do not exceed max length
 	const handleNext = () => {
-		setRenderedContent((prev) => Math.min(prev + 1, LessonOne[1].length));
+		setCurrentIndex((prev) => Math.min(prev + 1, LessonOne[1].length - 1));
+		setTimeout(() => {
+			contentEndRef.current?.scrollIntoView({ behavior: "smooth" });
+		}, 500);
+	};
+
+	// Move to the previous section (if available)
+	const handleBack = () => {
+		setCurrentIndex((prev) => Math.max(prev - 1, 0));
 		setTimeout(() => {
 			contentEndRef.current?.scrollIntoView({ behavior: "smooth" });
 		}, 500);
@@ -102,36 +113,39 @@ const WebDesignLessonOne = () => {
 		<div id="web-design-lesson-one" style={{ opacity, transition: "opacity 1.5s ease-in-out" }}>
 			<NavigationBar />
 			<div id="all-lessons-container">
-				{/*Future code here to determine which lesson is shown*/}
-				{/*Current Lesson = AllLessonsArray[i++]*/}
 				<div className="lesson">
-					{/*Rendering the Main Header*/}
+					{/* Main Header */}
 					<h1 className="fade-word-effect" style={{ animationDelay: "0.2s" }}>
 						{LessonOne[0][0]}
 					</h1>
-					{/*Rendering sub Header + its paragraphs*/}
-					{/*the opacity line ensures content starts w opacity 0 and fades in*/}
-					{LessonOne[1].slice(0, renderedContent).map((heading, index) => (
-						<div
-							key={index}
-							className="fade-word-effect"
-							style={{
-								animationDelay: "1s",
-								opacity: renderedContent - 1 === index ? 0 : 1,
-								transition: "opacity 1s ease-in-out",
-							}}
-						>
-							<h2>{heading}</h2>
-							<p>{LessonOne[2][index].join(" ")}</p>
-						</div>
-					))}
+					{/* Current Section Content */}
+					<div
+						className="fade-word-effect"
+						style={{
+							animationDelay: "1.5s",
+							transition: "opacity 1s ease-in-out",
+						}}
+					>
+						<h2>{LessonOne[1][currentIndex]}</h2>
+						<p>
+							{LessonOne[2][currentIndex].map((line, i) => (
+								<React.Fragment key={i}>
+									{line}
+									<br />
+									<br />
+								</React.Fragment>
+							))}
+						</p>
+					</div>
 					<div ref={contentEndRef} />
 				</div>
-				<button id="next-button" onClick={handleNext}>
-					Next
-				</button>
+				<div id="button-containers">
+					{/* Show Back button if not on the first section */}
+					{currentIndex > 0 && <button onClick={handleBack}>Back</button>}
+					{/* Show Next button if not on the last section */}
+					{currentIndex < LessonOne[1].length - 1 && <button onClick={handleNext}>Next</button>}
+				</div>
 			</div>
-			{/*Future button here to handle next lesson click*/}
 		</div>
 	);
 };

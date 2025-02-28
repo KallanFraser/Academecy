@@ -11,30 +11,34 @@
 
 #all-lessons-container {
 	margin-top: 6rem;
-	width: 100%;
-	height: 40rem;
+	width: 60%;
+	height: auto;
+	border-top: 0.35rem solid hsl(0, 0%, 0%);
+	border-bottom: 0.35rem solid hsl(0, 0%, 0%);
+	margin-bottom: 5rem;
 }
 
 .lesson {
-	margin: 3rem;
 	padding: 1.25rem;
 	display: flex;
 	flex-direction: column;
-	gap: 0.25rem;
 }
 
 .lesson h1 {
+	margin-bottom: 1rem;
 	text-align: center;
-	font-weight: 600;
 	font-size: 2.75rem;
+	color: hsl(120, 45%, 24%);
 }
 
 .lesson h2 {
 	font-size: 2rem;
+	text-align: center;
+	color: hsl(120, 45%, 24%);
+	text-decoration: underline;
 }
 
 .lesson p {
-	display: flex;
 	font-size: 1.5rem;
 }
 
@@ -50,6 +54,92 @@
 	}
 }
 
-#next-button {
-	z-index: 10;
+#button-containers {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 2rem;
+	display: flex;
+	gap: 3rem;
+}
+
+@keyframes growButton {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.2);
+	}
+}
+
+@keyframes shrinkButton {
+	0% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+#button-containers button {
+	padding: 1rem 1.75rem;
+	font-size: 1.75rem;
+	cursor: pointer;
+	border-radius: 20px;
+	border: none;
+	color: var(--inner-font-color);
+	font-weight: 600;
+	z-index: 0;
+	animation: shrinkButton 0.5s forwards;
+}
+
+#button-containers button:hover {
+	animation: growButton 0.5s forwards;
+}
+
+/*This layer sits on top of the glowing button version*/
+#button-containers button::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	border-radius: 20px;
+	background: hsla(0, 0%, 19%, 0.95); /*Actual Background Color for the button*/
+	z-index: -1;
+}
+
+@keyframes glowingEffect {
+	0% {
+		background-position: 0% 0%;
+	}
+	100% {
+		background-position: 400% 0%;
+	}
+}
+
+#button-containers button::before {
+	content: "";
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	width: calc(100% + 4px);
+	height: calc(100% + 4px);
+	border-radius: 10px;
+
+	/*Glow Effect color*/
+	background: linear-gradient(
+		45deg,
+		hsl(120, 54%, 31%),
+		hsl(103, 100%, 30%),
+		hsl(104, 43%, 23%),
+		hsl(120, 54%, 31%)
+	);
+	background-size: 600%;
+	filter: blur(12px); /*Gives the soft look to the glow*/
+	z-index: -1; /*Ensures that the glowing effect sits behind the button*/
+
+	/*Glow Effect animation*/
+	animation: glowingEffect 5s linear infinite;
 }
